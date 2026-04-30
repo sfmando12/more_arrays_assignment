@@ -1,16 +1,76 @@
 #include <iostream>
+using namespace std;
 
-// TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+int insertid(int array[], int &count, int size);
+
+void printMenu() {
+    cout << "Student ID Manager Menu" << endl;
+    cout << "1. Insert ID" << endl;
+    cout << "2. Search ID" << endl;
+    cout << "3. Replace ID" << endl;
+    cout << "4. Delete ID" << endl;
+    cout << "5. Display ID" << endl;
+    cout << "6. Copy to Backup" << endl;
+    cout << "7. compare to backup" << endl;
+    cout << "8. Exit" << endl;
+}
+
 int main() {
-    // TIP Press <shortcut actionId="RenameElement"/> when your caret is at the <b>lang</b> variable name to see how CLion can help you rename it.
-    auto lang = "C++";
-    std::cout << "Hello and welcome to " << lang << "!\n";
 
-    for (int i = 1; i <= 5; i++) {
-        // TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-        std::cout << "i = " << i << std::endl;
+    int idArray[20];
+    int arrayCount = 0;
+    int id;
+    int selection;
+    int backupIds[20];
+    printMenu();
+    cout << " What would like to do with the ID?: " << endl;
+    cin >> selection;
+
+    while (selection != -1) {
+        switch (selection) {
+            case 1: {
+                insertid(idArray, arrayCount, 20);
+            }
+            break;
+            case 2: {
+            }
+            break;
+            case 3: {
+            }
+            break;
+            case 4: {
+            }
+            break;
+            case 5: {
+
+            }
+            break;
+            default:
+                cout << "Invalid choice" << endl;
+        }
+        printMenu();
+        cout << " What would like to do with the ID?: " << endl;
+        cin >> selection;
+    }
+}
+
+// ------------------------------------------------------------------ //
+
+//
+//
+// return: -1 not enough space
+//         0 was success
+int insertid(int array[], int &count, int size) {
+    if (count == size) {
+        cout << "Array is full" << endl;
+        return -1;
     }
 
+    cout << "Enter ID: ";
+    int id;
+    cin >> id;
+
+    array[count] = id;
+    count++;
     return 0;
-    // TIP See CLion help at <a href="https://www.jetbrains.com/help/clion/">jetbrains.com/help/clion/</a>. Also, you can try interactive lessons for CLion by selecting 'Help | Learn IDE Features' from the main menu.
 }
