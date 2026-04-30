@@ -1,16 +1,149 @@
+#include <algorithm>
 #include <iostream>
+using namespace std;
 
-// TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+int insertid(int array[], int &count, int size);
+
+void printids(int idArray[], int arrayCount);
+
+void searchID(int idArray[], int arrayCount);
+
+void replaceID(int idarray[], int arrayCount);
+
+void printMenu() {
+    cout << "Student ID Manager Menu" << endl;
+    cout << "1. Insert ID" << endl;
+    cout << "2. Search ID" << endl;
+    cout << "3. Replace ID" << endl;
+    cout << "4. Delete ID" << endl;
+    cout << "5. Display ID" << endl;
+    cout << "6. Copy to Backup" << endl;
+    cout << "7. compare to backup" << endl;
+    cout << "8. Exit" << endl;
+}
+
 int main() {
-    // TIP Press <shortcut actionId="RenameElement"/> when your caret is at the <b>lang</b> variable name to see how CLion can help you rename it.
-    auto lang = "C++";
-    std::cout << "Hello and welcome to " << lang << "!\n";
+    int idArray[20];
+    int arrayCount = 0;
+    int id;
+    int selection;
+    int backupIds[20];
+    printMenu();
+    cout << " What would like to do with the ID?: " << endl;
+    cin >> selection;
 
-    for (int i = 1; i <= 5; i++) {
-        // TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-        std::cout << "i = " << i << std::endl;
+    while (selection != -1) {
+        switch (selection) {
+            case 1: {
+                insertid(idArray, arrayCount, 20);
+            }
+            break;
+            case 2:
+                searchID(idArray, arrayCount);
+
+                break;
+            case 3:
+                replaceID(idArray, arrayCount);
+                break;
+            case 4:
+
+                break;
+            case 5:
+                printids(idArray, arrayCount);
+                break;
+            case 6:
+
+                break;
+            case 7:
+
+                break;
+            case 8:
+                exit(0);
+            default:
+                cout << "Invalid choice" << endl;
+        }
+        printMenu();
+        cout << " What would like to do with the ID?: " << endl;
+        cin >> selection;
+    }
+}
+
+// ------------------------------------------------------------------ //
+
+//
+//
+// return: -1 not enough space
+//         0 was success
+int insertid(int array[], int &count, int size) {
+    if (count == size) {
+        cout << "Array is full" << endl;
+        return -1;
     }
 
+    cout << "Enter ID: ";
+    int id;
+    cin >> id;
+
+    array[count] = id;
+    count++;
     return 0;
-    // TIP See CLion help at <a href="https://www.jetbrains.com/help/clion/">jetbrains.com/help/clion/</a>. Also, you can try interactive lessons for CLion by selecting 'Help | Learn IDE Features' from the main menu.
+}
+
+
+int linearSearch(int idArray[], int arrayCount, int id) {
+    for (int i = 0; i < arrayCount; i++) {
+        if (idArray[i] == id) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+void searchID(int idArray[], int arrayCount) {
+    int index;
+    int id;
+    cout << "Enter ID: ";
+    cin >> id;
+    index = linearSearch(idArray, arrayCount, id);
+    if (index == -1 || arrayCount == 0) {
+        cout << "Invalid ID" << endl;
+        return;
+    }
+    cout << "The following ID was found: " << id << endl;
+}
+
+void printids(int idArray[], int arrayCount) {
+    cout << "Student IDs" << endl;
+    cout << "-----------" << endl;
+
+    if (arrayCount == 0) {
+        cout << "Array is empty" << endl<< endl;
+    }
+
+    for (int i = 0; i < arrayCount; i++) {
+        cout << idArray[i] << endl<< endl;
+    }
+}
+
+void replaceID(int idArray[], int arrayCount) {
+    int index;
+    int id;
+    int newid;
+    cout << "Enter ID to replace: ";
+    cin >> id;
+    index = linearSearch(idArray, arrayCount, id);
+
+    // this checks if id exist
+    if (index == -1 || arrayCount == 0) {
+        cout << "Invalid ID" << endl;
+        return;
+    }
+
+    // id exsits, so replace with new
+    cout << "The ID was found: " << id << endl;
+    cout << "Enter new ID: ";
+    cin >> newid;
+
+    idArray[index] = newid;
+
 }
