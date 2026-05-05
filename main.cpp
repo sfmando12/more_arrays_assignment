@@ -1,6 +1,7 @@
 #include <algorithm>
 #include <iostream>
 using namespace std;
+void DeleteID(int idArray[], int arrayCount);
 
 int insertid(int array[], int &count, int size);
 
@@ -46,7 +47,7 @@ int main() {
                 replaceID(idArray, arrayCount);
                 break;
             case 4:
-
+                DeleteID(idArray, arrayCount);
                 break;
             case 5:
                 printids(idArray, arrayCount);
@@ -117,11 +118,11 @@ void printids(int idArray[], int arrayCount) {
     cout << "-----------" << endl;
 
     if (arrayCount == 0) {
-        cout << "Array is empty" << endl<< endl;
+        cout << "Array is empty" << endl << endl;
     }
 
     for (int i = 0; i < arrayCount; i++) {
-        cout << idArray[i] << endl<< endl;
+        cout << idArray[i] << endl << endl;
     }
 }
 
@@ -139,11 +140,27 @@ void replaceID(int idArray[], int arrayCount) {
         return;
     }
 
-    // id exsits, so replace with new
+    // id exits, so replace with new
     cout << "The ID was found: " << id << endl;
     cout << "Enter new ID: ";
     cin >> newid;
 
     idArray[index] = newid;
+}
+
+void DeleteID(int idArray[], int arrayCount) {
+    int index;
+    int id;
+    cout << "Enter ID to delete: ";
+    cin >> id;
+    index = linearSearch(idArray, arrayCount, id);
+    if (index == -1 || arrayCount == 0) {
+        cout << "Invalid ID" << endl;
+        return;
+    }
+
+    for ( int i= index; i < arrayCount-1; i++) {
+        idArray[i] = idArray[i+1];
+    }
 
 }
