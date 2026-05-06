@@ -1,6 +1,8 @@
 #include <algorithm>
 #include <iostream>
 using namespace std;
+bool isarrayidentical(int idArray[], int backupIDS[], int arrayCount, int backupCount);
+
 void DeleteID(int idArray[], int arrayCount);
 
 int insertid(int array[], int &count, int size);
@@ -10,6 +12,10 @@ void printids(int idArray[], int arrayCount);
 void searchID(int idArray[], int arrayCount);
 
 void replaceID(int idarray[], int arrayCount);
+
+int BackupID(int idArray[], int backupIDS[], int arrayCount);
+
+
 
 void printMenu() {
     cout << "Student ID Manager Menu" << endl;
@@ -25,10 +31,14 @@ void printMenu() {
 
 int main() {
     int idArray[20];
+    int backupIds[20];
+
     int arrayCount = 0;
+    int backupCount = 0;
+
     int id;
     int selection;
-    int backupIds[20];
+
     printMenu();
     cout << " What would like to do with the ID?: " << endl;
     cin >> selection;
@@ -51,12 +61,15 @@ int main() {
                 break;
             case 5:
                 printids(idArray, arrayCount);
+                cout << "Backup IDs" << endl;
+                printids(backupIds, backupCount);
                 break;
             case 6:
+                backupCount = BackupID(idArray, backupIds, arrayCount);
 
                 break;
             case 7:
-
+                isarrayidentical(idArray, backupIds, arrayCount, backupCount);
                 break;
             case 8:
                 exit(0);
@@ -159,8 +172,37 @@ void DeleteID(int idArray[], int arrayCount) {
         return;
     }
 
-    for ( int i= index; i < arrayCount-1; i++) {
-        idArray[i] = idArray[i+1];
+    for (int i = index; i < arrayCount - 1; i++) {
+        idArray[i] = idArray[i + 1];
+    }
+}
+
+
+int BackupID(int idArray[], int backupIDS[], int arrayCount) {
+    for (int i = 0; i < arrayCount; i++) {
+        backupIDS[i] = idArray[i];
     }
 
+    return arrayCount;
+}
+
+
+
+bool isarrayidentical(int idArray[], int backupIDS[], int arrayCount, int backupCount) {
+
+    if (arrayCount != backupCount) {
+        cout<<"the backups are different"<<endl;
+        return false;
+
+    }
+
+    for (int i = 0; i < backupCount; i++) {
+        if (idArray[i] != backupIDS[i]) {
+            cout<<"the backups are different"<<endl;
+            return false;
+        }
+    }
+
+   cout<<"the backups are identical"<<endl;
+    return true;
 }
