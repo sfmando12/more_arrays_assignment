@@ -189,7 +189,6 @@ int BackupID(int idArray[], int backupIDS[], int arrayCount) {
 
 
 bool isarrayidentical(int idArray[], int backupIDS[], int arrayCount, int backupCount) {
-
     if (arrayCount != backupCount) {
         cout<<"the backups are different"<<endl;
         return false;
@@ -203,6 +202,7 @@ bool isarrayidentical(int idArray[], int backupIDS[], int arrayCount, int backup
         }
     }
 
-   cout<<"the backups are identical"<<endl;
+    cout<<"the backups are identical"<<endl;
     return true;
 }
+//done
